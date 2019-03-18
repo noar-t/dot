@@ -23,3 +23,7 @@ sudo apt install -qq -y texlive zathura
 
 # Media
 sudo apt install -qq -y mpv
+
+# Install ugly programs as snaps
+echo "Setting up snap packages"
+sudo snap install discord mailspring viber-unofficial
