@@ -3,8 +3,8 @@
 echo "Setting up ubuntu packages and updates"
 
 # Update all packages
-sudo apt update
-sudo apt upgrade
+sudo apt update -qq -y
+sudo apt upgrade -qq -y
 
 # Basic packages
 sudo apt install -qq -y curl git tmux vim wget zsh
