@@ -1,25 +1,32 @@
 #!/bin/bash
 
-# Required packages: curl, rsync, git (how did you get here)
-
 # This script will install everything needed to utilize my
 # dotfiles on MacOS and/or Linux (Ubuntu, Fedora eventually)
+# Required packages: curl, rsync, git (how did you get here)
 
 # Update vim with plugins, plugin manager is installed via vimrc
 if command -v vim >/dev/null 2>&1; then
-  echo "Bootstraping Vim"
-  vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+  echo "Bootstraping vim"
+  vim '+plugupdate' '+plugclean!' '+plugupdate' '+qall'
 fi
 
 # Setup powerline fonts (probably a better way to do this)
+echo "Setting up powerline fonts"
 git clone https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
 /tmp/fonts/install.sh
 rm -rf /tmp/fonts
 
 # Setup zsh plugins
-if [[ ! -d $ANTIGEN_HOME ]]; then
-  mkdir $ANTIGEN_HOME
-  curl -L git.io/antigen > $ANTIGEN_HOME/antigen.zsh
+if [[ ! -d $antigen_home ]]; then
+  echo "Setting up zsh plugin manager"
+  mkdir $antigen_home
+  curl -l git.io/antigen > $antigen_home/antigen.zsh
+fi
+
+# Setup ssh-key
+if [ ! -f $HOME/id_rsa ]; then
+  echo "Generataing ssh-key"
+  ssh-keygen -t rsa
 fi
 
 # Make ZSH default shell
