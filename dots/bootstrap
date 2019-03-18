@@ -4,10 +4,42 @@
 # dotfiles on MacOS and/or Linux (Ubuntu, Fedora eventually)
 # Required packages: curl, rsync, git (how did you get here)
 
+# Handle OS specific files (mostly package managers)
+system_type=$(uname -s)
+
+# If MacOS
+if [ "$system_type" = "Darwin" ]; then
+  echo "Merge in MacOS specific files"
+  rsync -a Darwin/ $HOME
+
+  # Install homebrew if it's missing
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing homebrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+  
+  # Use brewfile to autoinstall packages
+  if [ -f "$HOME/.Brewfile" ]; then
+    echo "Updating homebrew bundle"
+    brew bundle --global
+  fi
+fi
+
+# If Linux
+if [ "$system_type" = "Linux" ]; then
+  echo "Installing packages"
+  ./scripts/ubuntu
+  echo "Merge in Linux specific files"
+  rsync -a Linux/ $HOME
+fi
+
+# Make ZSH default shell
+chsh -s $(which zsh)
+
 # Update vim with plugins, plugin manager is installed via vimrc
 if command -v vim >/dev/null 2>&1; then
   echo "Bootstraping vim"
-  vim '+plugupdate' '+plugclean!' '+plugupdate' '+qall'
+  vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
 fi
 
 # Setup powerline fonts (probably a better way to do this)
@@ -29,33 +61,5 @@ if [ ! -f $HOME/id_rsa ]; then
   ssh-keygen -t rsa
 fi
 
-# Make ZSH default shell
-chsh -s $(which zsh)
 
 
-# Handle OS specific files
-system_type=$(uname -s)
-
-# If MacOS
-if [ "$system_type" = "Darwin" ]; then
-  echo "Merge in MacOS specific files"
-  rsync -a $HOME/dots/Darwin/ $HOME
-
-  # Install homebrew if it's missing
-  if ! command -v brew >/dev/null 2>&1; then
-    echo "Installing homebrew"
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-  fi
-  
-  # Use brewfile to autoinstall packages
-  if [ -f "$HOME/.Brewfile" ]; then
-    echo "Updating homebrew bundle"
-    brew bundle --global
-  fi
-fi
-
-# If Linux
-if [ "$system_type" = "Linux" ]; then
-  echo "Merge in Linux specific files"
-  rsync -a $HOME/dots/Linux/ $HOME
-fi

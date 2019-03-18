@@ -13,7 +13,7 @@ sudo apt install -qq -y curl git tmux vim wget zsh
 sudo apt install -qq -y gnome-common i3
 
 # General utilities
-sudo apt install -qq -y mutt ncdu ranger zip
+sudo apt install -qq -y htop mutt ncdu ranger w3m w3m-img zip
 
 # Programming
 sudo apt install -qq -y gcc python python3 python-pip python3-pip
