@@ -1,0 +1,12 @@
+! scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+! URxvt*scrollWithBuffer: true
+
+URxvt.scrollBar: false
+URxvt.font: xft:Hack:size=12
+URxvt.boldFont: xft:Hack:Bold:size=12
+URxvt.cursorUnderline: true
+
+! Normal copy/paset bindings
+URxvt.iso14755: false
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard

@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Required packages: curl, rsync, git (how did you get here)
+
+# This script will install everything needed to utilize my
+# dotfiles on MacOS and/or Linux (Ubuntu, Fedora eventually)
+
+# Update vim with plugins, plugin manager is installed via vimrc
+if command -v vim >/dev/null 2>&1; then
+  echo "Bootstraping Vim"
+  vim '+PlugUpdate' '+PlugClean!' '+PlugUpdate' '+qall'
+fi
+
+# Setup powerline fonts (probably a better way to do this)
+git clone https://github.com/powerline/fonts.git --depth=1 /tmp/fonts
+/tmp/fonts/install.sh
+rm -rf /tmp/fonts
+
+# Setup zsh plugins
+if [[ ! -d $ANTIGEN_HOME ]]; then
+  mkdir $ANTIGEN_HOME
+  curl -L git.io/antigen > $ANTIGEN_HOME/antigen.zsh
+fi
+
+# Make ZSH default shell
+chsh -s $(which zsh)
+
+
+# Handle OS specific files
+system_type=$(uname -s)
+
+# If MacOS
+if [ "$system_type" = "Darwin" ]; then
+  echo "Merge in MacOS specific files"
+  rsync -a $HOME/dots/Darwin/ $HOME
+
+  # Install homebrew if it's missing
+  if ! command -v brew >/dev/null 2>&1; then
+    echo "Installing homebrew"
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  fi
+  
+  # Use brewfile to autoinstall packages
+  if [ -f "$HOME/.Brewfile" ]; then
+    echo "Updating homebrew bundle"
+    brew bundle --global
+  fi
+fi
+
+# If Linux
+if [ "$system_type" = "Linux" ]; then
+  echo "Merge in Linux specific files"
+  rsync -a $HOME/dots/Linux/ $HOME
+fi
