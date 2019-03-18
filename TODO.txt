@@ -1,0 +1,7 @@
+Handle installing some python packages with --user:
+  streamlink
+  pywal
+
+Add Fedora and Arch support
+Add i3 config
+
