@@ -3,6 +3,9 @@ set nocompatible
 
 " visual autocomplete for command menu
 set wildmenu
+set wildmode=full
+
+"TODO maybe add spell checking
 
 " Mouse support
 set mouse=a
