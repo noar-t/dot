@@ -17,7 +17,7 @@ brew "ranger"
 brew "ssh-copy-id"
 brew "the_silver_searcher"
 brew "tmux"
-brew "vim", args: ["with-lua", "with-python@2", "with-python3", "with-override-system-vim"]
+brew "vim"
 brew "w3m"
 brew "wget"
 brew "zsh"
