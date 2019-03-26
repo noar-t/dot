@@ -15,6 +15,7 @@ if [ "$system_type" = "Darwin" ]; then
   echo "Merge in MacOS specific files"
   rsync -a Darwin/ $HOME
 
+  xcode-select --install
   # Install homebrew if it's missing
   if ! command -v brew >/dev/null 2>&1; then
     echo "Installing homebrew"
