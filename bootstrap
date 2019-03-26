@@ -27,6 +27,9 @@ if [ "$system_type" = "Darwin" ]; then
   if [ -f "$HOME/.Brewfile" ]; then
     echo "Updating homebrew bundle"
     brew bundle --global
+
+    # Fix Zsh to be a login shell MacOS
+    sudo su -c "echo $(which zsh) >> /etc/shells"
   fi
 fi
 
