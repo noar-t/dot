@@ -5,6 +5,7 @@
 # Required packages: curl, rsync, git (how did you get here)
 
 echo "Moving platform independent dotfiles"
+cp Common/.* $HOME
 cp Common/* $HOME
 
 # Handle OS specific files (mostly package managers)
