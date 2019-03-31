@@ -69,5 +69,4 @@ if [ ! -f $HOME/id_rsa ]; then
   ssh-keygen -t rsa
 fi
 
-
-
+# TODO add gpg key
