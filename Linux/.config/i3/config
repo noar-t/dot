@@ -1,7 +1,11 @@
 exec --no-startup-id compton --config ~/.config/compton.conf -b
 exec --no-startup-id xmodmap ~/.Xmodmap
 exec --no-startup-id xrdb ~/.Xresources
-exec --no-startup-id feh --bg-fill /home/noah/Wallpapers/tokyo.jpg
+exec --no-startup-id feh --bg-fill /home/noah/shared/Wallpapers/tokyo.jpg
+exec --no-startup-id udiskie -s 
+exec --no-startup-id xss-lock -- betterlockscreen -l dim
+exec --no-startup-id unclutter &
+exec --no-startup-id dunst
 
 # Use win key as modifier
 set $mod Mod4
@@ -126,13 +130,13 @@ mode "resize" {
 bindsym $mod+r mode "resize"
 
 # Pulse Audio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5% #increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5% #decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id ~/scripts/volume_up
+bindsym XF86AudioLowerVolume exec --no-startup-id ~/scripts/volume_down
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle
 
 # Sreen brightness controls
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness
+bindsym XF86MonBrightnessUp exec xbacklight -inc 5 && ~/scripts/display_brightness
+bindsym XF86MonBrightnessDown exec xbacklight -dec 5  && ~/scripts/display_brightness
 
 
 # Start i3bar to display a workspace bar (plus the system information i3status
