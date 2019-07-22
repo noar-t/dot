@@ -1,0 +1,2 @@
+pactl -- set-sink-volume 0 +2%
+/home/noah/scripts/display_volume

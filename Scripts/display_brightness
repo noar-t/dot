@@ -1,0 +1,7 @@
+#/bin/sh
+BRIGHTNESS=$(xbacklight)
+
+# arbitrary id
+msg_id="991048"
+
+dunstify -a "Brightness" -r $msg_id "${BRIGHTNESS%.*}"

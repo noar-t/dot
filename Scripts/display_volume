@@ -1,0 +1,15 @@
+#/bin/sh
+getdefaultsinkname() {
+    pacmd stat | awk -F": " '/^Default sink name: /{print $2}'
+}
+
+getdefaultsinkvol() {
+    pacmd list-sinks |
+        awk '/^\s+name: /{indefault = $2 == "<'$(getdefaultsinkname)'>"}
+            /^\s+volume: / && indefault {print $5; exit}'
+
+}
+
+# Arbitrary ID to allow replacement of old notification
+msg_id="991049"
+getdefaultsinkvol | while read OUT; do dunstify -a "Volume" -r $msg_id "$OUT"; done
