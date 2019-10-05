@@ -103,10 +103,6 @@ silent! if plug#begin()
   " --- Easier Commenting ---
   Plug 'scrooloose/nerdcommenter'
   let g:NERDSpaceDelims = 1 " Add spaces after comment delimiters by default
-
-  " --- Break bad navigation habbits via key repeat timeout --- "
-  Plug 'takac/vim-hardtime'
-  let g:hardtime_default_on = 1 " Default to on
   
   call plug#end()
 endif
