@@ -20,7 +20,7 @@ set expandtab
 inoremap jk <esc>
 let mapleader='\'
 
-
+set tags=tags;
 set backspace=indent,eol,start
 
 " ------ Plugins to eventually learn ------
@@ -95,7 +95,9 @@ silent! if plug#begin()
   " New Stuff to Learn
   
   " --- Indentation Guide ---
-  Plug 'Yggdroot/indentLine'
+  Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesToggle' }
+  let g:indentLine_enabled = 0
+  let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
   " -- Move quickly around  
   Plug 'easymotion/vim-easymotion'
@@ -113,13 +115,14 @@ match Error /\%81v.\+/
 
 " set theme
 silent! colorscheme gruvbox
+"silent! colorscheme wal
 set background=dark
 let &t_ut=''
 
 " --- Appearance ---
 set ruler
 set cursorline
-set number
+set number relativenumber
 syntax enable
 
 " --- Search Options ---
