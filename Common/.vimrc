@@ -105,6 +105,9 @@ silent! if plug#begin()
   " --- Easier Commenting ---
   Plug 'scrooloose/nerdcommenter'
   let g:NERDSpaceDelims = 1 " Add spaces after comment delimiters by default
+
+  " --- Code Insight ---
+  Plug 'neoclide/coc.nvim', {'branch': 'release'}
   
   call plug#end()
 endif
@@ -122,7 +125,7 @@ let &t_ut=''
 " --- Appearance ---
 set ruler
 set cursorline
-set number relativenumber
+set number
 syntax enable
 
 " --- Search Options ---
