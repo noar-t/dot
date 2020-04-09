@@ -1,6 +1,5 @@
 " Noah's Vim config
 set nocompatible
-
 " visual autocomplete for command menu
 set wildmenu
 set wildmode=full
@@ -27,7 +26,6 @@ set backspace=indent,eol,start
 "Plug 'junegunn/vim-easy-align'
 "Plug 'tpope/vim-fugitive'
 "Plug 'terryma/vim-multiple-cursors'
-
 
 " Set the runtime path to include fzf
 set rtp+=~/.fzf
@@ -81,23 +79,15 @@ silent! if plug#begin()
   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   Plug 'junegunn/fzf.vim'
   map <C-p> :Files<CR>|                           " Ctrl+p will fuzzy find files
-  
-  " --- Remove distractions ---
-  Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
-  let g:goyo_width = 100 " Set width for Goyo mode
 
   " --- Allow renaming files ---
   Plug 'danro/rename.vim', { 'on': 'Rename' }
 
   " --- Extra Syntax Highlighting ---
+  let g:polyglot_disabled = ['latex']
   Plug 'sheerun/vim-polyglot'
 
-  " New Stuff to Learn
-  
-  " --- Indentation Guide ---
-  Plug 'Yggdroot/indentLine', { 'on': 'IndentLinesToggle' }
-  let g:indentLine_enabled = 0
-  let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+  " New Stuff
 
   " -- Move quickly around  
   Plug 'easymotion/vim-easymotion'
@@ -107,7 +97,15 @@ silent! if plug#begin()
   let g:NERDSpaceDelims = 1 " Add spaces after comment delimiters by default
 
   " --- Code Insight ---
-  Plug 'neoclide/coc.nvim', {'branch': 'release'}
+  Plug 'neoclide/coc.nvim', {'branch': 'release', 'do': 'CocInstall coc-clangd'}
+  inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+  inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
+  Plug 'frazrepo/vim-rainbow'
+  let g:rainbow_active = 1
+
+  Plug 'lervag/vimtex'
+  Plug 'craigemery/vim-autotag'
   
   call plug#end()
 endif
